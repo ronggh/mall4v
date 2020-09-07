@@ -6,25 +6,21 @@
              ref="dataForm"
              @keyup.enter.native="dataFormSubmit()"
              label-width="80px">
-      <el-form-item label="社群Id"
-                    prop="dataForm.groupId">
+      <el-form-item label="社群Id">
         <el-input v-model="dataForm.groupId"
                   :disabled="true"
                   placeholder="社群Id"></el-input>
       </el-form-item>  
-      <el-form-item label="社群名称"
-                    prop="dataForm.groupName">
+      <el-form-item label="社群名称">
         <el-input v-model="dataForm.groupName"
                   :disabled="true"
                   placeholder="社群名称"></el-input>
       </el-form-item>   
-      <el-form-item label="社群头像"
-                    prop="dataForm.groupHeadImg">
+      <el-form-item label="社群头像">
         <img :src="dataForm.groupHeadImg"
              class="image">
       </el-form-item>
-      <el-form-item label="申请理由"
-                    prop="dataForm.applyReason">
+      <el-form-item label="申请理由">
         <el-input v-model="dataForm.applyReason"
                   :disabled="true"
                   placeholder="申请理由"></el-input>

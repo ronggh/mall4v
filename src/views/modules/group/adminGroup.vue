@@ -7,26 +7,22 @@
              ref="dataForm"
              @keyup.enter.native="dataFormSubmit()"
              label-width="100px">
-      <el-form-item label="社群Id"
-                    prop="dataForm.groupId">
+      <el-form-item label="社群Id">
         <el-input v-model="dataForm.groupId"
                   :disabled="true"
                   placeholder="社群Id"></el-input>
       </el-form-item>  
-      <el-form-item label="社群名称"
-                    prop="dataForm.groupName">
+      <el-form-item label="社群名称">
         <el-input v-model="dataForm.groupName"
                   :disabled="true"
                   placeholder="社群名称"></el-input>
       </el-form-item>
-      <el-form-item label="社群标签"
-                    prop="dataForm.groupMark">
+      <el-form-item label="社群标签">
         <el-input v-model="dataForm.groupMark"
                   :disabled="false"
                   placeholder="请输入社群标签，多个时以逗号分隔"></el-input>
       </el-form-item> 
-      <el-form-item label="关联学校"
-                    prop="dataForm.schoolCnname">
+      <el-form-item label="关联学校">
         <el-select v-model="dataForm.schoolId" 
                   filterable
                   style="width:100%" 
