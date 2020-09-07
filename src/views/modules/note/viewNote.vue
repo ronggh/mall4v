@@ -11,12 +11,12 @@
                   placeholder="笔记Id"></el-input>
       </el-form-item>  
       <el-form-item label="笔记标题">
-        <el-input v-model="dataForm.title"
+        <el-input v-model="dataForm.note.title"
                   :disabled="true"
                   placeholder="笔记标题"></el-input>
       </el-form-item>
       <el-form-item label="笔记内容">
-        <el-input v-model="dataForm.content"
+        <el-input v-model="dataForm.note.content"
                   type="textarea"
                   :rows="3"
                   :disabled="true"
@@ -38,8 +38,8 @@ export default {
       visible: false,
       dataForm: {
         noteId: 0,
-        title: '',
-        content: ''
+        note: {},
+        noteImages: []
       },
       page: {
         total: 0, // 总页数
@@ -65,7 +65,8 @@ export default {
             'noteId': this.dataForm.noteId
           })
         }).then(({ data }) => {
-          this.dataForm = data.note
+          this.dataForm.note = data.note
+          this.dataForm.noteImages = data.noteImages
         })
       }
     }

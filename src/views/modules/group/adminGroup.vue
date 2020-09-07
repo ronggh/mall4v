@@ -40,6 +40,7 @@
         <el-transfer v-model="admins"
                   style="height:300px" 
                   :titles="['社群成员', '社群管理员']"
+                  :filterable="true"
                   :props="{
                     key: 'uid',
                     label: 'nickname'
