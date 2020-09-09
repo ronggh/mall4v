@@ -8,9 +8,6 @@
              size="mini"
              class="myform"
              label-width="100px">
-      <el-form-item label="笔记Id：">
-        <label style="display:inline-block">{{dataForm.note.noteId}}</label>
-      </el-form-item>
       <el-form-item label="笔记标题：">
         <label style="display:inline-block">{{dataForm.note.title}}</label>
       </el-form-item>
@@ -42,8 +39,8 @@
       <el-form-item >
         <el-radio v-model="dataForm.note.isFormal" label="0" disabled>草稿</el-radio>
         <el-radio v-model="dataForm.note.isFormal" label="1" disabled>正式发布</el-radio>
-        <el-checkbox v-model="dataForm.note.isHide=='1'">隐藏</el-checkbox>
-        <el-checkbox v-model="dataForm.note.isSync=='1'">同步到个人首页</el-checkbox>
+        <el-checkbox v-model="this.isHideNote">隐藏</el-checkbox>
+        <el-checkbox v-model="this.isSyncNote">同步到个人首页</el-checkbox>
       </el-form-item>
 
       <el-form-item label="笔记反响：" style="display:inline-block;width:100%">
@@ -52,7 +49,15 @@
         <label style="display:inline-block;width:20%">评论数：{{dataForm.note.commentNum}}</label>
         <label style="display:inline-block;width:20%">积分数：{{dataForm.note.score}}</label>
       </el-form-item>
-
+      <el-form-item label="笔记图片：" style="display:inline-block;width:100%">
+        <el-image style="width:150px;margin:5px"
+            v-for="(item,index) in dataForm.noteImages" 
+            :key="index" 
+            :src="item.imgUrl"
+            :lazy="true"
+            :preview-src-list="getImageList(index)">
+        </el-image>
+      </el-form-item>
     </el-form>
 
     <span slot="footer"
@@ -80,6 +85,15 @@ export default {
       resourcesUrl: window.SITE_CONFIG.resourcesUrl
     }
   },
+  // 使用计算属性
+  computed: {
+    isHideNote () {
+      return this.dataForm.note.isHide === '1'
+    },
+    isSyncNote () {
+      return this.dataForm.note.isSync === '1'
+    }
+  },
   methods: {
     init (noteId) {
       this.dataForm.noteId = noteId || 0
@@ -101,6 +115,18 @@ export default {
           this.dataForm.noteImages = data.noteImages
         })
       }
+    },
+    getImageList (index) {
+      let arr = []
+      let i = 0
+      for (i; i < this.dataForm.noteImages.length; i++) {
+        arr.push(this.dataForm.noteImages[i + index].imgUrl)
+        if (i + index >= this.dataForm.noteImages.length - 1) {
+          index = 0 - (i + 1)
+        }
+      }
+      // console.log(arr)
+      return arr
     }
   }
 }
