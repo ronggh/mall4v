@@ -15,7 +15,7 @@
       </template>
     </avue-crud>
 
-    
+
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
       dataListSelections: [],
       tableOption: tableOption,
       page: {
-        total: 0, // 总页数
+        total: 0, // 总页数。
         currentPage: 1, // 当前页数
         pageSize: 10 // 每页显示多少条
       }
@@ -40,7 +40,12 @@ export default {
   },
   methods: {
     // 获取数据列表
-    getDataList (page, params) {
+    getDataList (page, params, type) {
+      if (type === '1') {
+        this.params = params
+      } else {
+        params = this.params
+      }
       this.dataListLoading = true
       this.$http({
         url: this.$http.adornUrl('/group/list/closedList'),
@@ -88,11 +93,13 @@ export default {
         .catch(() => { })
     },
     // 条件查询
-    searchChange (params) {
-      this.getDataList(this.page, params)
+    searchChange(params) {
+      this.getDataList(this.page, params, '1')
+    },
+    // 多选变化
+    selectionChange(val) {
+      this.dataListSelections = val
     }
-
   }
-
 }
 </script>

@@ -53,11 +53,6 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/group/list/nonVerifyList'),
         method: 'post',
-        // data: this.$http.adornData({
-        //   'currentPage': this.page.currentPage,
-        //   'pageSize': this.page.pageSize,
-        //   'groupName': params.groupName
-        // })
         data: this.$http.adornData(
           Object.assign(
             {

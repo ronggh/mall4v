@@ -17,8 +17,7 @@
                   placeholder="社群名称"></el-input>
       </el-form-item>   
       <el-form-item label="社群头像">
-        <img :src="dataForm.groupHeadImg"
-             class="image">
+        <img :src="dataForm.groupHeadImg" class="image"/>
       </el-form-item>
       <el-form-item label="申请理由">
         <el-input v-model="dataForm.applyReason"

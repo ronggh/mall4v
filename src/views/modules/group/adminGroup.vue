@@ -27,6 +27,7 @@
                   filterable
                   style="width:100%" 
                   :disabled="false"
+                  clearable 
                   placeholder="请选择要关联的学校">
           <el-option
             v-for="item in schools"
@@ -133,6 +134,7 @@ export default {
     dataFormSubmit () {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
+          // console.log(this.dataForm.schoolId)
           this.$http({
             url: this.$http.adornUrl(`/group/info/adminGroup`),
             method: 'post',

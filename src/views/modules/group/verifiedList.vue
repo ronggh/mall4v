@@ -7,14 +7,8 @@
                @search-change="searchChange"
                @on-load="getDataList">
 
-
       <template slot-scope="scope" slot="menu">
-        <!-- 社置群标签 -->
-        <!-- <el-button type="primary"
-                   icon="el-icon-edit"
-                   size="small"
-                   v-if="isAuth('group:info:setGroupMark')"
-                   @click.stop="markGroup(scope.row.groupId, scope.row.groupName, scope.row.groupMark)">群标签</el-button> -->
+       
         <!-- 社置群 -->
         <el-button type="primary"
                    icon="el-icon-edit"
@@ -31,11 +25,6 @@
         
       </template>
     </avue-crud>
-
-    <!-- 弹窗, 群标签 -->
-    <mark-group v-if="markGroupVisible"
-                   ref="markGroup"
-                   @refreshDataList="getDataList"></mark-group>
     
     <!-- 弹窗, 设置群 -->
     <admin-group v-if="adminGroupVisible"
@@ -46,7 +35,6 @@
 
 <script>
 import { tableOption } from '@/crud/group/verifiedList'
-import MarkGroup from './markGroup'
 import AdminGroup from './adminGroup'
 export default {
   data () {
@@ -65,7 +53,6 @@ export default {
     }
   },
   components: {
-    MarkGroup,
     AdminGroup
   },
   methods: {
@@ -90,13 +77,6 @@ export default {
         this.dataListLoading = false
       })
     },
-    // 设置群标签
-    // markGroup (groupId, groupName, groupMark) {
-    //   this.markGroupVisible = true
-    //   this.$nextTick(() => {
-    //     this.$refs.markGroup.init(groupId, groupName, groupMark)
-    //   })
-    // },
     // 社置群：标签、学校和管理员
     adminGroup (groupId, schoolId) {
       this.adminGroupVisible = true
