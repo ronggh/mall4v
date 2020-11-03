@@ -33,5 +33,18 @@ export const tableOption = {
   }, {
     label: '所属学校',
     prop: 'schoolCnname'
+  }, {
+    label: '加群需要认证',
+    prop: 'needAuth',    
+    type: 'select',
+    dicData: [
+      {
+        label: '否',
+        value: 0
+      }, {
+        label: '是',
+        value: 1
+      }
+    ]
   }]
 }

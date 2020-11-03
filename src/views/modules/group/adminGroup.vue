@@ -27,7 +27,7 @@
                   filterable
                   style="width:100%" 
                   :disabled="false"
-                  clearable 
+                  clearable
                   placeholder="请选择要关联的学校">
           <el-option
             v-for="item in schools"
@@ -37,6 +37,12 @@
           </el-option>
         </el-select>
       </el-form-item> 
+      <el-form-item label="加群认证">
+        <el-radio-group v-model="dataForm.needAuth">
+            <el-radio :label="0">不需认证</el-radio>
+            <el-radio :label="1">需要认证</el-radio>
+        </el-radio-group>
+       </el-form-item>
       <el-form-item label="社群管理员">
         <el-transfer v-model="admins"
                   style="height:300px" 
@@ -70,6 +76,7 @@ export default {
         groupName: '',
         groupMark: '',
         schoolId: 0,
+        needAuth:0,
         groupMembers: [],
         groupAdmins: []
       },
@@ -125,6 +132,7 @@ export default {
           // 为管理员进行赋值
           data.groupAdmins.forEach(item => {
             this.admins.push(item.uid)
+
           })
           // console.log(this.admins)
         })
@@ -141,6 +149,7 @@ export default {
             data: this.$http.adornData({
               groupId: this.dataForm.groupId,
               groupMark: this.dataForm.groupMark,
+              needAuth:this.dataForm.needAuth,
               schoolId: this.dataForm.schoolId,
               admins: this.admins
             })
