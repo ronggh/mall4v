@@ -42,7 +42,7 @@
             <el-radio :label="0">不需认证</el-radio>
             <el-radio :label="1">需要认证</el-radio>
         </el-radio-group>
-       </el-form-item>
+      </el-form-item>
       <el-form-item label="社群管理员">
         <el-transfer v-model="admins"
                   style="height:300px" 
@@ -149,7 +149,7 @@ export default {
             data: this.$http.adornData({
               groupId: this.dataForm.groupId,
               groupMark: this.dataForm.groupMark,
-              needAuth:this.dataForm.needAuth,
+              needAuth: this.dataForm.needAuth,
               schoolId: this.dataForm.schoolId,
               admins: this.admins
             })
