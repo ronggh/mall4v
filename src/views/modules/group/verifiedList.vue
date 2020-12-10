@@ -5,8 +5,6 @@
                :data="dataList"
                :option="tableOption"
                @search-change="searchChange"
-               @current-change="currentChange"
-               @size-change="sizeChange"
                @on-load="getDataList">
 
       <template slot-scope="scope" slot="menu">
@@ -62,12 +60,19 @@ export default {
   methods: {
     // 获取数据列表
     getDataList (page, params) {
-      if(page != null) {
+      if(page != null ) {
         this.page = page
       }
       if(params != null) {
         this.params = params
       }
+
+      // console.log("this current page ===> " + this.page.currentPage)
+      // console.log("current page ===> " + page.currentPage)
+      // console.log("this.params ===> " + JSON.stringify(this.params))
+      // console.log(" params ===> " + JSON.stringify(params))
+
+   
       this.dataListLoading = true
       this.$http({
         url: this.$http.adornUrl('/group/list/verifiedList'),
@@ -78,7 +83,7 @@ export default {
               currentPage: page == null ? this.page.currentPage : page.currentPage,
               pageSize: page == null ? this.page.pageSize : page.pageSize
             },
-            params
+            params == null ? this.params : params
           )
         )
       }).then(({ data }) => {
@@ -128,16 +133,16 @@ export default {
       this.getDataList(this.page, params)
     },
     // 换页
-    currentChange(val) {
-      this.page.currentPage = val
-      this.getDataList(this.page,this.params)       
-    },
-    // 改变每页显示数量
-    sizeChange(val) {
-      this.page.currentPage = 1
-      this.page.pageSize = val
-      this.getDataList(this.page,this.params)
-    }
+    // currentChange(val) {
+    //   // this.page.currentPage = val      
+    //   // this.getDataList(this.page,this.params)       
+    // },
+    // // 改变每页显示数量
+    // sizeChange(val) {
+    //   this.page.currentPage = 1
+    //   this.page.pageSize = val
+    //   // this.getDataList(this.page,this.params)
+    // }
   }
 }
 </script>
