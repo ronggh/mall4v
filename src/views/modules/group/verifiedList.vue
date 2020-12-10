@@ -6,6 +6,7 @@
                :option="tableOption"
                @search-change="searchChange"
                @current-change="currentChange"
+               @size-change="sizeChange"
                @on-load="getDataList">
 
       <template slot-scope="scope" slot="menu">
@@ -47,6 +48,7 @@ export default {
       adminGroupVisible: false,
       tableOption: tableOption,
       page: {
+        // pageSizes: [5,10,15,20],
         total: 0, // 总页数
         currentPage: 1, // 当前页数
         pageSize: 10 // 每页显示多少条
@@ -125,9 +127,16 @@ export default {
       this.params = params
       this.getDataList(this.page, params)
     },
+    // 换页
     currentChange(val) {
       this.page.currentPage = val
       this.getDataList(this.page,this.params)       
+    },
+    // 改变每页显示数量
+    sizeChange(val) {
+      this.page.currentPage = 1
+      this.page.pageSize = val
+      this.getDataList(this.page,this.params)
     }
   }
 }
