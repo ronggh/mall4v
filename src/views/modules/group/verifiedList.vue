@@ -5,6 +5,7 @@
                :data="dataList"
                :option="tableOption"
                @search-change="searchChange"
+               @current-change="currentChange"
                @on-load="getDataList">
 
       <template slot-scope="scope" slot="menu">
@@ -49,7 +50,8 @@ export default {
         total: 0, // 总页数
         currentPage: 1, // 当前页数
         pageSize: 10 // 每页显示多少条
-      }
+      },
+      params: {}
     }
   },
   components: {
@@ -58,6 +60,12 @@ export default {
   methods: {
     // 获取数据列表
     getDataList (page, params) {
+      if(page != null) {
+        this.page = page
+      }
+      if(params != null) {
+        this.params = params
+      }
       this.dataListLoading = true
       this.$http({
         url: this.$http.adornUrl('/group/list/verifiedList'),
@@ -113,7 +121,13 @@ export default {
     },
     // 条件查询
     searchChange (params) {
+      this.page.currentPage = 1
+      this.params = params
       this.getDataList(this.page, params)
+    },
+    currentChange(val) {
+      this.page.currentPage = val
+      this.getDataList(this.page,this.params)       
     }
   }
 }

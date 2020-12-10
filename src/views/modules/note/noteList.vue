@@ -17,7 +17,7 @@
                    icon="el-icon-delete"
                    size="small"
                    v-if="isAuth('note:info:delNote')"
-                   @click.stop="deleteNote(scope.row.noteId)">删除</el-button> 
+                   @click.stop="deleteNote(scope.row.noteId)">删除</el-button>
       </template>
     </avue-crud>
 
@@ -110,5 +110,4 @@ export default {
       this.getDataList(this.page, params)
     }
   }
-}
-</script>
+}</script>
