@@ -31,8 +31,9 @@
                   placeholder="社群简介"></el-input>
       </el-form-item>
       <el-form-item label="关联学校">
-        <el-select v-model="dataForm.schoolId" 
+        <el-select v-model="schoolIds" 
                   filterable
+                  multiple
                   style="width:100%" 
                   :disabled="false"
                   clearable
@@ -83,12 +84,12 @@ export default {
         groupId: 0,
         groupName: '',
         groupDesc:'',
-        groupMark: '',
-        schoolId: 0,
+        groupMark: '',        
         needAuth:0,
         groupMembers: [],
         groupAdmins: []
       },
+      schoolIds: [],
       schools: [],
       members: [],
       admins: [], 
@@ -142,6 +143,11 @@ export default {
         }).then(({ data }) => {
           // console.log(data)
           this.dataForm = data
+          // 关联学校
+          this.schoolIds = []
+          data.groupSchools.forEach(item =>{
+            this.schoolIds.push(item.schoolId)
+          })
           //
           this.members = this.dataForm.groupMembers.concat(this.dataForm.groupAdmins)
           // 为管理员进行赋值
@@ -167,7 +173,7 @@ export default {
               groupMark: this.dataForm.groupMark,
               groupDesc: this.dataForm.groupDesc,
               needAuth: this.dataForm.needAuth,
-              schoolId: this.dataForm.schoolId,
+              schoolIds: this.schoolIds,
               admins: this.admins
             })
           }).then(({ data }) => {

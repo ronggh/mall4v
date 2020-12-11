@@ -30,10 +30,12 @@ export const tableOption = {
   }, {
     label: '创建人',
     prop: 'nickname'
-  }, {
-    label: '所属学校',
-    prop: 'schoolCnname'
-  }, {
+  },
+  //  {
+  //   label: '所属学校',
+  //   prop: 'schoolCnname'
+  // }, 
+  {
     label: '加群需要认证',
     prop: 'needAuth',    
     type: 'select',

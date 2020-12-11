@@ -33,8 +33,10 @@ export const tableOption = {
   }, {
     label: '申请人',
     prop: 'nickname'
-  }, {
-    label: '所属学校',
-    prop: 'schoolCnname'
-  }]
+  }
+  // , {
+  //   label: '所属学校',
+  //   prop: 'schoolCnname'
+  // }
+]
 }

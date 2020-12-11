@@ -32,7 +32,8 @@ export default {
         total: 0, // 总页数。
         currentPage: 1, // 当前页数
         pageSize: 10 // 每页显示多少条
-      }
+      },
+      params: {}
     }
   },
   components: {
@@ -40,11 +41,12 @@ export default {
   },
   methods: {
     // 获取数据列表
-    getDataList (page, params, type) {
-      if (type === '1') {
+    getDataList (page, params) {
+      if(page != null ) {
+        this.page = page
+      }
+      if(params != null) {
         this.params = params
-      } else {
-        params = this.params
       }
       this.dataListLoading = true
       this.$http({
@@ -56,7 +58,7 @@ export default {
               currentPage: page == null ? this.page.currentPage : page.currentPage,
               pageSize: page == null ? this.page.pageSize : page.pageSize
             },
-            params
+            params == null ? this.params : params
           )
         )
       }).then(({ data }) => {
@@ -94,7 +96,9 @@ export default {
     },
     // 条件查询
     searchChange(params) {
-      this.getDataList(this.page, params, '1')
+      this.page.currentPage = 1
+      this.params = params
+      this.getDataList(this.page, params)
     },
     // 多选变化
     selectionChange(val) {

@@ -42,7 +42,8 @@ export default {
         total: 0, // 总页数
         currentPage: 1, // 当前页数
         pageSize: 10 // 每页显示多少条
-      }
+      },
+      params: {}
     }
   },
   components: {
@@ -51,6 +52,12 @@ export default {
   methods: {
     // 获取数据列表
     getDataList (page, params) {
+      if(page != null ) {
+        this.page = page
+      }
+      if(params != null) {
+        this.params = params
+      }
       this.dataListLoading = true
       this.$http({
         url: this.$http.adornUrl('/group/list/unverifiedList'),
@@ -61,7 +68,7 @@ export default {
               currentPage: page == null ? this.page.currentPage : page.currentPage,
               pageSize: page == null ? this.page.pageSize : page.pageSize
             },
-            params
+            params == null ? this.params : params
           )
         )
       }).then(({ data }) => {
@@ -79,6 +86,8 @@ export default {
     },
     // 条件查询
     searchChange (params) {
+      this.page.currentPage = 1
+      this.params = params
       this.getDataList(this.page, params)
     }
   }
